@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
 
@@ -10,15 +10,17 @@ services:
       POSTGRES_PASSWORD: django_example
       POSTGRES_DB: django_example_database
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: ["./wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     depends_on:
       - db
+volumes:
+  pgdata:
