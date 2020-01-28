@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usermanage',
 
+    'django_iban',
     'social_django',
 ]
 
