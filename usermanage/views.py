@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY
 from rest_framework.views import APIView
 
 from usermanage.forms import IbanUserForm
@@ -43,8 +43,12 @@ class IbanUserList(IbanUserView):
         """Create a user"""
         queryset = get_users_by_owner(request)
         serializer = create_user(request)
+        if serializer.is_valid():
+            status_code = HTTP_201_CREATED
+        else:
+            status_code = HTTP_422_UNPROCESSABLE_ENTITY
         form = get_creation_form(serializer)
-        return Response({'iban_users': queryset, 'form': form})
+        return Response({'iban_users': queryset, 'form': form}, status=status_code)
 
 
 class IbanUserDelete(IbanUserView):
@@ -56,7 +60,7 @@ class IbanUserDelete(IbanUserView):
         if status != HTTP_200_OK:
             return HttpResponse(status=status)
         iban_user.delete()
-        return redirect('user-list')
+        return render(request, 'deleted.html')
 
 
 class IbanUserDetail(IbanUserView):
@@ -81,7 +85,7 @@ class IbanUserDetail(IbanUserView):
 
         serializer = serialize_user(iban_user, data=request.data)
         if not serializer.is_valid():
-            return Response({'serializer': serializer, 'iban_user': iban_user})
+            return Response({'serializer': serializer, 'iban_user': iban_user}, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
         serializer.save()
-        return redirect('user-list')
+        return render(request, 'updated.html')
