@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'django_iban',
     'social_django',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -140,7 +141,7 @@ STATIC_URL = '/static/'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/v1/api/users/'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_PIPELINE = (

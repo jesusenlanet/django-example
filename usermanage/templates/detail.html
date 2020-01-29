@@ -1,0 +1,39 @@
+{% load rest_framework %}
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>IBAN user</title>
+
+</head>
+
+<body>
+
+<div class="jumbotron">
+    {% if user.is_authenticated %}
+        <p>Logged as {{ user.username }} <a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
+    {% endif %}
+    <h1>({{ iban_user.id }}){{ iban_user.first_name}} - {{ iban_user.iban }}</h1>
+    <a href="{% url 'user-list' %}">Back to list</a>
+</div>
+
+<form action="{% url 'user-detail' pk=iban_user.pk %}" method="POST" class="form-group">
+    {% csrf_token %}
+    {% render_form serializer %}
+    <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+<form action="{% url 'user-delete' pk=iban_user.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+
+</body>
+</html>

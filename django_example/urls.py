@@ -17,11 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 from usermanage import views as usermanage_views
+from usermanage.views import IbanUserList, IbanUserDetail, IbanUserDelete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('social/', include('social_django.urls', namespace='social')),
     path('', usermanage_views.index),
     path('logout/', usermanage_views.logout_view, name='logout'),
-
+    path('v1/api/users/', IbanUserList.as_view(), name='user-list'),
+    path('v1/api/users/<int:pk>/', IbanUserDetail.as_view(), name='user-detail'),
+    path('v1/api/users/<int:pk>/delete/', IbanUserDelete.as_view(), name='user-delete'),
 ]
