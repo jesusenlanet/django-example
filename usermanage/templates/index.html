@@ -14,6 +14,8 @@
         {% if user.is_authenticated %}
             <p>Logged as {{ user.username }}</p>
             <a href="{% url 'logout' %}">Logout</a>
+            <br>
+            <a href="{% url 'user-list' %}">Go to the user management</a>
         {% else %}
             <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
         {% endif %}
