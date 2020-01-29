@@ -53,3 +53,9 @@ docker-compose up -d
 Go to your browser and request that URL:
 
 [http://localhost:8000](http://localhost:8000)
+
+## Considerations:
+Dockerfile and docker-compose are right now in development mode, that means, changes made on the code you clone/download will be reflected into the container.
+Once the application development is terminated that behaviour will be suppressed.
+
+Exists another Dockerfile.production intended to be used in automatic deployments, that takes the code automatically from github, that file will replace the existing Dockerfile once the development is finished..
