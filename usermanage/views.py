@@ -1,18 +1,16 @@
-from http.client import HTTPResponse
-
 from django.conf import settings
 from django.contrib.auth import logout
-from django.http import HttpResponseNotAllowed
-from django.shortcuts import render, redirect, get_object_or_404
-from rest_framework.exceptions import MethodNotAllowed
+from django.http import HttpResponseNotAllowed, HttpResponse
+from django.shortcuts import render, redirect
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
 from rest_framework.views import APIView
 
-from usermanage.models import IbanUser
-from usermanage.serializers import IbanUserSerializer
+from usermanage.forms import IbanUserForm
+from usermanage.services import get_users_by_owner, get_creation_form, get_user, serialize_user, create_user
 
 
 def index(request):
@@ -25,6 +23,7 @@ def logout_view(request):
 
 
 class IbanUserView(APIView):
+    """Base class for the API view"""
     def http_method_not_allowed(self, request, *args, **kwargs):
         return HttpResponseNotAllowed(self.allowed_methods, 'Method now allowed')
 
@@ -35,8 +34,29 @@ class IbanUserList(IbanUserView):
     template_name = 'list.html'
 
     def get(self, request):
-        queryset = IbanUser.objects.all()
-        return Response({'iban_users': queryset})
+        """Retrieve a list of users"""
+        queryset = get_users_by_owner(request)
+        form = IbanUserForm()
+        return Response({'iban_users': queryset, 'form': form})
+
+    def post(self, request):
+        """Create a user"""
+        queryset = get_users_by_owner(request)
+        serializer = create_user(request)
+        form = get_creation_form(serializer)
+        return Response({'iban_users': queryset, 'form': form})
+
+
+class IbanUserDelete(IbanUserView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk):
+        """Delete a iban user"""
+        iban_user, status = get_user(request, pk)
+        if status != HTTP_200_OK:
+            return HttpResponse(status=status)
+        iban_user.delete()
+        return redirect('user-list')
 
 
 class IbanUserDetail(IbanUserView):
@@ -45,24 +65,23 @@ class IbanUserDetail(IbanUserView):
     template_name = 'detail.html'
 
     def get(self, request, pk):
-        iban_user = get_object_or_404(IbanUser, pk=pk)
-        serializer = IbanUserSerializer(iban_user)
+        """Retrieve a single iban user"""
+        iban_user, status = get_user(request, pk)
+        if status != HTTP_200_OK:
+            return HttpResponse(status=status)
+
+        serializer = serialize_user(iban_user)
         return Response({'serializer': serializer, 'iban_user': iban_user})
 
     def post(self, request, pk):
-        iban_user = get_object_or_404(IbanUser, pk=pk)
-        serializer = IbanUserSerializer(iban_user, data=request.data)
+        """Update a iban user"""
+        iban_user, status = get_user(request, pk)
+        if status != HTTP_200_OK:
+            return HttpResponse(status=status)
+
+        serializer = serialize_user(iban_user, data=request.data)
         if not serializer.is_valid():
             return Response({'serializer': serializer, 'iban_user': iban_user})
+
         serializer.save()
-        return redirect('user-list')
-
-
-class IbanUserDelete(IbanUserView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, pk):
-        # user = request.user
-        iban_user = get_object_or_404(IbanUser, pk=pk)
-        iban_user.delete()
         return redirect('user-list')

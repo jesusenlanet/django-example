@@ -20,7 +20,7 @@
     {% else %}
         <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a>
     {% endif %}
-    <h1>({{ iban_user.id }}){{ iban_user.first_name}} - {{ iban_user.iban }}</h1>
+    <h1>({{ iban_user.id }}) - {{ iban_user.first_name}} - {{ iban_user.iban }}</h1>
     <a href="{% url 'user-list' %}">Back to list</a>
 </div>
 

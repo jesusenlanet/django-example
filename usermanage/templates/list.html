@@ -44,6 +44,12 @@
     </tbody>
 </table>
 
+  <form method="post" action="{% url 'user-list' %}">
+    {% csrf_token %}
+    <table>{{ form }}</table>
+      <input type="hidden" value>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
 
 
 </body>

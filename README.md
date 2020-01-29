@@ -15,24 +15,18 @@ Backend is a Django application.
 ## The API
 The API for the users manipulation is implemented using Django Rest Framework.
 
-## Known problems
-API need to be consumed from a web application with the less javascript possible, so we don't use ajax.
+## Endopoints
+API need to be consumed from a web application with forms, forms doesn't allow DELETE and PUT methods.
 
 [In HTML forms, the only CRUD methods we can use are GET and PUT](https://www.w3.org/TR/html52/sec-forms.html#element-attrdef-form-method)
 
-That means that we need to implement endpoints for the web app and for a REST client:
+That means that we need to implement some endpoints for the web app:
 
-Creation from web app (remember, the less javascript possible)
-* /myapi/item/**create** [POST]
+Creation from web app
+* /v1/api/user/**create** [POST]
 
 Deletion from web app
-* /myapi/item/<identifier>/**delete** [POST]
-
-Creation from a REST client
-* /myapi/item/**create** [PUT]
-
-Deletion from a REST client
-* /myapi/item/<identifier> [DELETE]
+* /v1/api/user/<identifier>/**delete** [POST]
 
 ## The admins
 The administrator login are made with social login.
