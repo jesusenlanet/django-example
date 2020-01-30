@@ -1,18 +1,6 @@
+{% extends 'base.html' %}
 {% load rest_framework %}
-
-<html>
-
-<head>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>IBAN user</title>
-
-</head>
-
-<body>
+{% block content %}
 
 <div class="jumbotron">
     {% if user.is_authenticated %}
@@ -34,6 +22,4 @@
     {% csrf_token %}
     <input type="submit" value="Delete" class="btn btn-danger">
 </form>
-
-</body>
-</html>
+{% endblock %}
