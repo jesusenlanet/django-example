@@ -18,7 +18,7 @@ The API for the users manipulation is implemented using Django Rest Framework.
 ## Endopoints
 API need to be consumed from a web application with forms, forms doesn't allow DELETE and PUT methods.
 
-[In HTML forms, the only CRUD methods we can use are GET and PUT](https://www.w3.org/TR/html52/sec-forms.html#element-attrdef-form-method)
+[In HTML forms, the only CRUD methods we can use are GET and POST](https://www.w3.org/TR/html52/sec-forms.html#element-attrdef-form-method)
 
 That means that we need to implement some endpoints for the web app:
 
