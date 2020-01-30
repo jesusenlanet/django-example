@@ -21,8 +21,8 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=<your app key id>
-      - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=<your app secret>
+      - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=<YOUR_KEY_HERE>
+      - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=<YOUR_APP_SECRET_HERE>
     depends_on:
       - db
 volumes:

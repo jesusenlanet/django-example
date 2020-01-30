@@ -41,15 +41,31 @@ In docker-compose you need to configure the next environment variables with your
 ## Run the application
 ```bash
 docker-compose build
-docker-compose up -d
+docker-compose up
 ```
 
 Go to your browser and request that URL:
 
 [http://localhost:8000](http://localhost:8000)
 
-## Considerations:
-Dockerfile and docker-compose are right now in development mode, that means, changes made on the code you clone/download will be reflected into the container.
-Once the application development is terminated that behaviour will be suppressed.
+Once you finish, detach with Ctrl + C and stop containers with the next command:
+```bash
+docker-compose stop
+```
 
-Exists another Dockerfile.production intended to be used in automatic deployments, that takes the code automatically from github, that file will replace the existing Dockerfile once the development is finished..
+## Test
+To run tests, execute next commands in a shell:
+
+```bash
+docker-compose -f docker-compose.test.yml build
+docker-compose -f docker-compose.test.yml up
+```
+
+Once the tests are finished, detach with Ctrl + C and stop containers with the next command:
+```bash
+docker-compose -f docker-compose.test.yml stop
+```
+
+Tests install pytest, that is placed in requirements_tests.txt, to not to install testing dependencies into the production container.
+
+Pytest settings can be found in pytest.ini
