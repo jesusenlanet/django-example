@@ -61,7 +61,9 @@ docker-compose -f docker-compose.test.yml build
 docker-compose -f docker-compose.test.yml up
 ```
 
-Once the tests are finished, detach with Ctrl + C and stop containers with the next command:
+Once the tests are finished, detach with Ctrl + C.
+
+In case you launched tests with -d option, stop the containers with the next command:
 ```bash
 docker-compose -f docker-compose.test.yml stop
 ```
