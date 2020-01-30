@@ -1,0 +1,40 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "!lrZPOv2TwFzC9UymhJYEPqMUHzyEcnfNCaXxv4ZN",
+      "last_login": "2020-01-29T16:28:30.559Z",
+      "is_superuser": false,
+      "username": "user1",
+      "first_name": "User",
+      "last_name": "Number1",
+      "email": "jesus.pedro.gutierrez.almazan@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-28T15:09:48.836Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "!TwT4Ubc7XyfLx27Bveh9RZvxrX9CLaNkrBV5eK5K",
+      "last_login": "2020-01-29T14:51:25.712Z",
+      "is_superuser": false,
+      "username": "user2",
+      "first_name": "User",
+      "last_name": "Number2",
+      "email": "user2@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-01-28T16:44:44.891Z",
+      "groups": [],
+      "user_permissions": [
+        16
+      ]
+    }
+  }
+]

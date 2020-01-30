@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: django_example
+      POSTGRES_PASSWORD: django_example
+      POSTGRES_DB: django_example_database
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  test:
+    build: .
+    command: ["./wait-for-it.sh", "db:5432", "--", "./test.sh"]
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=400448914638-mavbkofqd2ac1au55hp1dj6bbpula1u7.apps.googleusercontent.com
+      - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=JA7ukGN_T_wEqk3xPiD2UCi1
+    depends_on:
+      - db
+volumes:
+  pgdata:

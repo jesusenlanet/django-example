@@ -1,0 +1,42 @@
+[
+  {
+    "model": "usermanage.ibanuser",
+    "pk": 1,
+    "fields": {
+      "creator": 1,
+      "iban": "ES0400758872768146768871",
+      "first_name": "user1",
+      "last_name": "user1"
+    }
+  },
+  {
+    "model": "usermanage.ibanuser",
+    "pk": 2,
+    "fields": {
+      "creator": 1,
+      "iban": "ES1231904186817934673756",
+      "first_name": "user1",
+      "last_name": "user1"
+    }
+  },
+  {
+    "model": "usermanage.ibanuser",
+    "pk": 3,
+    "fields": {
+      "creator": 2,
+      "iban": "ES3104876591071767173958",
+      "first_name": "user2",
+      "last_name": "user2"
+    }
+  },
+  {
+    "model": "usermanage.ibanuser",
+    "pk": 4,
+    "fields": {
+      "creator": 2,
+      "iban": "ES4900819163254588566621",
+      "first_name": "user2",
+      "last_name": "user2"
+    }
+  }
+]
