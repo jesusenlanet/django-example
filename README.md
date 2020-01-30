@@ -38,10 +38,10 @@ In docker-compose you need to configure the next environment variables with your
 * SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
 * SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
 
-## Run the application
+## Run the web application
 ```bash
 docker-compose build
-docker-compose up
+docker-compose up -d
 ```
 
 Go to your browser and request that URL:
