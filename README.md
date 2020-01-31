@@ -26,7 +26,7 @@ Creation from web app
 * /v1/api/user/**create** [POST]
 
 Deletion from web app
-* /v1/api/user/<identifier>/**delete** [POST]
+* /v1/api/user/\<identifier\>/**delete** [POST]
 
 ## The admins
 The administrator login are made with social login.
