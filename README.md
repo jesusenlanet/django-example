@@ -15,7 +15,7 @@ Backend is a Django application.
 ## The API
 The API for the users manipulation is implemented using Django Rest Framework.
 
-## Endopoints
+## Endpoints
 API need to be consumed from a web application with forms, forms doesn't allow DELETE and PUT methods.
 
 [In HTML forms, the only CRUD methods we can use are GET and POST](https://www.w3.org/TR/html52/sec-forms.html#element-attrdef-form-method)
